@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "creation": "2026-11-23 18:00:00",
+ "doctype": "DocType",
+ "document_type": "Other",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "intro",
+  "pcp_url",
+  "status_section",
+  "status",
+  "integration_user",
+  "column_break_1",
+  "linked_company",
+  "linked_company_id",
+  "linked_pcp_url",
+  "linked_at",
+  "code_hash",
+  "code_expires"
+ ],
+ "fields": [
+  {
+   "fieldname": "intro",
+   "fieldtype": "HTML",
+   "options": "<p>Connect this Frappe HR site to Pioneer Core Platform (PCP). PCP workflows can then read job requisitions, publish and close job openings and follow applicants here. PCP signs in as a dedicated integration user with the HR User role only.</p>"
+  },
+  {
+   "fieldname": "pcp_url",
+   "fieldtype": "Data",
+   "label": "PCP address",
+   "options": "URL",
+   "default": "https://core.pioneeraitech.com",
+   "reqd": 1,
+   "description": "Where your company signs in to PCP"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Connection"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Not connected\nWaiting for PCP\nConnected",
+   "default": "Not connected",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "integration_user",
+   "fieldtype": "Link",
+   "label": "Integration user",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "linked_company",
+   "fieldtype": "Data",
+   "label": "PCP company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "linked_company_id",
+   "fieldtype": "Data",
+   "label": "PCP company ID",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "linked_pcp_url",
+   "fieldtype": "Data",
+   "label": "Linked from",
+   "read_only": 1
+  },
+  {
+   "fieldname": "linked_at",
+   "fieldtype": "Datetime",
+   "label": "Connected on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "code_hash",
+   "fieldtype": "Data",
+   "label": "Code hash",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "code_expires",
+   "fieldtype": "Datetime",
+   "label": "Code expires",
+   "read_only": 1,
+   "hidden": 1
+  }
+ ],
+ "icon": "link",
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-11-23 18:00:00",
+ "modified_by": "Administrator",
+ "module": "HR",
+ "name": "PCP Integration Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HR Manager",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1
+}
