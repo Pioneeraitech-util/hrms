@@ -223,6 +223,71 @@ a.text-primary,
 	--icon-stroke: var(--pcp-link);
 }
 
+/* ---------- Layout: PCP's shell ---------- */
+/* Values measured on the live PCP pages: a white (dark: #191F2B) side panel with a hairline
+   border, a white header bar (dark: navy gradient), and content cards on the grey page. */
+
+:root:not([data-theme="dark"]) {
+	--pcp-panel: #ffffff;
+	--pcp-panel-border: #e2e8f0;
+	--pcp-topbar: #ffffff;
+	--pcp-topbar-border: #e5e7eb;
+}
+:root[data-theme="dark"] {
+	--pcp-panel: #191f2b;
+	--pcp-panel-border: #283040;
+	--pcp-topbar: linear-gradient(100deg, #071a40 0%, #0b2a66 55%, #0f3a8a 100%);
+	--pcp-topbar-border: #1f1f1f;
+}
+
+/* App rail and sidebar */
+#desk-dock,
+.body-sidebar {
+	background-color: var(--pcp-panel);
+	border-right-color: var(--pcp-panel-border);
+}
+
+/* Page header bar */
+.page-head {
+	background: var(--pcp-topbar);
+	border-bottom-color: var(--pcp-topbar-border);
+}
+:root[data-theme="dark"] .page-head .title-text,
+:root[data-theme="dark"] .page-head .page-title {
+	color: #ffffff;
+}
+/* Secondary buttons on the navy bar: translucent, as PCP's header controls. */
+:root[data-theme="dark"] .page-head .btn-default,
+:root[data-theme="dark"] .page-head .es-button:not([data-variant="solid"]) {
+	background-color: rgba(255, 255, 255, 0.08);
+	color: #e5e9f0;
+}
+:root[data-theme="dark"] .page-head .btn-default:hover,
+:root[data-theme="dark"] .page-head .es-button:not([data-variant="solid"]):hover {
+	background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Grey page behind the content, with the list or form in a white card */
+.page-container,
+.page-body {
+	background-color: var(--pcp-bg);
+}
+.page-content {
+	padding: 16px 20px 24px;
+}
+.layout-main-section {
+	background-color: var(--pcp-paper);
+	border: 1px solid var(--pcp-border);
+	border-radius: var(--pcp-radius-card);
+	box-shadow: var(--pcp-shadow-card);
+	overflow: clip;
+}
+/* The list's filter bar and the form page sit inside the card, so they take its colour. */
+.layout-main-section .page-form,
+.layout-main-section .form-page {
+	background-color: transparent;
+}
+
 /* ---------- Logos ---------- */
 
 /* Login, signup and forgot-password: Frappe takes the first app's app_logo_url, which is

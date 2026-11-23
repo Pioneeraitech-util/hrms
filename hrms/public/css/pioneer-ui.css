@@ -227,6 +227,14 @@ body {
 	background-color: rgb(var(--pcp-paper));
 }
 
+/* Top bars: PCP's navy gradient in dark mode (measured on live PCP), white in light.
+   Roster's NavBar and the employee app's page header (BaseLayout.vue). */
+:root[data-theme="dark"] .h-12.bg-white.border-b,
+:root[data-theme="dark"] ion-header .bg-white.shadow-sm {
+	background: linear-gradient(100deg, #071a40 0%, #0b2a66 55%, #0f3a8a 100%);
+	border-color: #1f1f1f;
+}
+
 /* Disabled solid buttons (`disabled:bg-gray-700 disabled:text-white` in upstream forms). */
 button:disabled.disabled\:bg-gray-700,
 .bg-surface-gray-7:disabled {
