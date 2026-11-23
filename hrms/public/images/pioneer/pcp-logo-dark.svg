@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="64" viewBox="0 0 250 64" fill="none" role="img" aria-label="Pioneer Core Platform">
+  <title>Pioneer Core Platform</title>
+  <rect x="0" y="0" width="29" height="29" rx="6" fill="#0369A1"/>
+  <rect x="35" y="0" width="29" height="29" rx="6" fill="#0EA5E9"/>
+  <rect x="0" y="35" width="29" height="29" rx="6" fill="#0EA5E9"/>
+  <circle cx="49.5" cy="49.5" r="14.5" fill="#38BDF8"/>
+  <text x="78" y="31" font-family="Inter, 'Segoe UI', Roboto, Arial, sans-serif" font-size="34" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5">Pioneer</text>
+  <text x="79" y="58" font-family="Inter, 'Segoe UI', Roboto, Arial, sans-serif" font-size="16" font-weight="700" fill="#38BDF8" letter-spacing="1.8">CORE PLATFORM</text>
+</svg>

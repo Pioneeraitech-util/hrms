@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-label="Pioneer Core Platform">
+  <rect x="0" y="0" width="29" height="29" rx="6" fill="#075985"/>
+  <rect x="35" y="0" width="29" height="29" rx="6" fill="#0369A1"/>
+  <rect x="0" y="35" width="29" height="29" rx="6" fill="#0369A1"/>
+  <circle cx="49.5" cy="49.5" r="14.5" fill="#0EA5E9"/>
+</svg>
