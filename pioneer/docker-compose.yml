@@ -1,0 +1,142 @@
+# pioneer/docker-compose.yml - Pioneer HR (Frappe HR) at https://hr.pioneeraitech.com
+#
+# Deployed by Delivery hub (Pipeline = stack). The pipeline ships THIS folder to the
+# server; servers/stacks/hrms-prod/deploy.sh in the deployer repo then:
+#   1. builds the image (Frappe + ERPNext + this branch of HRMS, see apps.json),
+#   2. starts the stack, creates the site once, and runs `bench migrate` on later deploys.
+#
+# Based on frappe_docker's pwd.yml. Values come from env files deploy.sh passes:
+#   HR_IMAGE              image built by deploy.sh (pioneer-hr/hrms:<commit>)
+#   HR_SITE               site name = public hostname (hr.pioneeraitech.com)
+#   HR_DB_ROOT_PASSWORD   generated once on the server, never committed
+#
+# Only `frontend` joins the shared `edge` network (the server's nginx proxies the
+# hostname to it); the database and Redis stay on the private `hr` network.
+
+x-app: &app
+  image: ${HR_IMAGE:?set by deploy.sh}
+  restart: unless-stopped
+  networks: [hr]
+  volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    - logs:/home/frappe/frappe-bench/logs
+
+x-redis-env: &redis-env
+  FRAPPE_REDIS_CACHE: redis://redis-cache:6379
+  FRAPPE_REDIS_QUEUE: redis://redis-queue:6379
+
+services:
+  # One-shot: writes db/redis settings into sites/common_site_config.json.
+  configurator:
+    <<: *app
+    restart: "no"
+    entrypoint: ["bash", "-c"]
+    command:
+      - >
+        ls -1 apps > sites/apps.txt;
+        bench set-config -g db_host db;
+        bench set-config -gp db_port 3306;
+        bench set-config -g redis_cache "redis://redis-cache:6379";
+        bench set-config -g redis_queue "redis://redis-queue:6379";
+        bench set-config -g redis_socketio "redis://redis-queue:6379";
+        bench set-config -gp socketio_port 9000;
+    depends_on:
+      db:
+        condition: service_healthy
+
+  backend:
+    <<: *app
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+
+  frontend:
+    <<: *app
+    container_name: hrms-prod-frontend
+    networks: [hr, edge]
+    command: ["nginx-entrypoint.sh"]
+    environment:
+      BACKEND: backend:8000
+      SOCKETIO: websocket:9000
+      FRAPPE_SITE_NAME_HEADER: ${HR_SITE:?set by deploy.sh}
+      # Requests arrive from the server's nginx on the edge network, which sets X-Forwarded-For.
+      UPSTREAM_REAL_IP_ADDRESS: 0.0.0.0/0
+      UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
+      UPSTREAM_REAL_IP_RECURSIVE: "on"
+      PROXY_READ_TIMEOUT: 120
+      CLIENT_MAX_BODY_SIZE: 50m
+    depends_on: [backend, websocket]
+
+  websocket:
+    <<: *app
+    command: ["node", "/home/frappe/frappe-bench/apps/frappe/socketio.js"]
+    environment: *redis-env
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+
+  queue-short:
+    <<: *app
+    command: ["bench", "worker", "--queue", "short,default"]
+    environment: *redis-env
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+
+  queue-long:
+    <<: *app
+    command: ["bench", "worker", "--queue", "long,default,short"]
+    environment: *redis-env
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+
+  scheduler:
+    <<: *app
+    command: ["bench", "schedule"]
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+
+  db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    networks: [hr]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --innodb-snapshot-isolation=OFF
+    environment:
+      MARIADB_ROOT_PASSWORD: ${HR_DB_ROOT_PASSWORD:?set by deploy.sh}
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis-queue:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    networks: [hr]
+    volumes:
+      - redis-queue-data:/data
+
+  redis-cache:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    networks: [hr]
+
+volumes:
+  db-data:
+  redis-queue-data:
+  sites:
+  logs:
+
+networks:
+  hr:
+  edge:
+    external: true
