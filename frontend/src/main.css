@@ -1,4 +1,5 @@
 @import "frappe-ui/src/style.css";
+@import "../../hrms/public/css/pioneer-brand.css";
 @import "../../hrms/public/css/pioneer-ui.css";
 
 ion-modal {

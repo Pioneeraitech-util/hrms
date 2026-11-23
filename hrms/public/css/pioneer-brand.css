@@ -1,0 +1,70 @@
+/*
+ * Pioneer HR: brand tokens. THE one place for Pioneer Core Platform (PCP) brand values.
+ *
+ * Change the brand here and nowhere else. Loaded first, before the theme files that use it:
+ *   - pioneer-theme.css  Desk and the login pages (app_include_css / web_include_css, hooks.py)
+ *   - pioneer-ui.css     the employee app (frontend/) and Roster (roster/), via their main CSS
+ * Upstream Frappe HR files never read these names, so upstream UI changes don't touch the brand.
+ *
+ * Source of truth: ata-parent, branch `PCP` (what core.pioneeraitech.com runs), checked
+ * against the live pages:
+ *   accent    src/edition/healthcare/config.ts  INDIGO #4F46E5, dark tint #A5B4FC
+ *   header    src/edition/healthcare/config.ts  `header`: white bar, ink #0B1F44, launcher
+ *             tints #EEF0FF / #E0E4FF, divider #DADDF5; dark: indigo gradient
+ *   links     live PCP home: #1D5FE0 ("Start building", "Build an agent", ...)
+ *   chips     live PCP lab chip: linear-gradient(#6366F1, #4338CA)
+ *   logo      src/edition/healthcare/PcpLogo.tsx, variant "core" (images/pioneer/pcp-logo*.svg)
+ *   loader    src/edition/healthcare/PcpLoader.tsx (images/pioneer/pcp-loader.svg)
+ */
+
+/* ---------- Light ---------- */
+:root:not([data-theme="dark"]) {
+	/* Accent: filled buttons, switches, checkboxes, progress, selected items */
+	--pcp-accent: #4f46e5;
+	--pcp-accent-hover: #4338ca;
+	--pcp-accent-gradient: linear-gradient(#6366f1, #4338ca);
+	--pcp-on-accent: #ffffff;
+	/* Soft accent: selected rows and sidebar items, icon tiles */
+	--pcp-accent-soft: #eef0ff;
+	--pcp-accent-soft-hover: #e0e4ff;
+	/* Readable accent for text and icons on the soft accent or on paper */
+	--pcp-accent-ink: #4338ca;
+	--pcp-focus: #c7d2fe;
+
+	--pcp-link: #1d5fe0;
+
+	/* Header bar */
+	--pcp-header-bg: #ffffff;
+	--pcp-header-ink: #0b1f44;
+	--pcp-header-border: #e5e7eb;
+	--pcp-header-divider: #daddf5;
+}
+
+/* ---------- Dark ---------- */
+:root[data-theme="dark"] {
+	/* White on #4F46E5 is 6.3:1 (config.ts), so filled buttons keep the same indigo. */
+	--pcp-accent: #4f46e5;
+	--pcp-accent-hover: #6366f1;
+	--pcp-accent-gradient: linear-gradient(#6366f1, #4338ca);
+	--pcp-on-accent: #ffffff;
+	--pcp-accent-soft: #272463;
+	--pcp-accent-soft-hover: #312e81;
+	/* config.ts accent.dark: 9.4:1 on dark surfaces */
+	--pcp-accent-ink: #a5b4fc;
+	--pcp-focus: #3730a3;
+
+	--pcp-link: #a5b4fc;
+
+	/* config.ts header.dark */
+	--pcp-header-bg: linear-gradient(100deg, #1e1b4b 0%, #272463 55%, #312e81 100%);
+	--pcp-header-ink: #ffffff;
+	--pcp-header-border: #1e1b4b;
+	--pcp-header-divider: #312e81;
+}
+
+/* ---------- Logo and loader (both modes) ---------- */
+:root {
+	--pcp-logo: url("/assets/hrms/images/pioneer/pcp-logo.svg");
+	--pcp-logo-dark: url("/assets/hrms/images/pioneer/pcp-logo-dark.svg");
+	--pcp-loader: url("/assets/hrms/images/pioneer/pcp-loader.svg");
+}

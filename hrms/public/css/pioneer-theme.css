@@ -8,8 +8,10 @@
  * Source of the values, checked against the live PCP pages (core.pioneeraitech.com):
  *   base:   ata-parent pcp-dev src/Misc/themes.ts, `Modern` theme (page #F7F8FA, slate text,
  *           #E5E7EB lines, 8px radius, Inter, soft shadows) and `darkTheme` (page #121620)
- *   accent: PCP's ui-v2 kit, workflow-web src/shared/ui-v2/tokens.ts (light pri #1D5FE0,
- *           dark pri #2F6BD8, dark surfaces #191F2B, lines #283040, ink #E5E9F0)
+ *   dark:   PCP's ui-v2 kit, workflow-web src/shared/ui-v2/tokens.ts (dark surfaces #191F2B,
+ *           lines #283040, ink #E5E9F0)
+ *   brand:  accent, links, header bar, focus, logo and loader are NOT set here; they come from
+ *           pioneer-brand.css (ata-parent branch PCP), loaded before this file.
  *
  * Frappe v16 builds Desk on the Espresso token scale: raw `--gray-*` values feed the semantic
  * `--surface-*`, `--ink-*` and `--outline-*` tokens, and the legacy names (`--text-color`,
@@ -56,20 +58,18 @@
 
 /* ---------- Light: PCP Modern ---------- */
 :root:not([data-theme="dark"]) {
-	/* Accent: PCP's ui-v2 kit (workflow-web src/shared/ui-v2/tokens.ts), which is what the
-	   live PCP pages show: flat #1D5FE0 buttons, #1A56CC links, #EAF1FE selection. */
-	--pcp-primary: #1d5fe0;
-	--pcp-primary-hover: #174fbf;
-	--pcp-primary-dark: #174fbf;
-	--pcp-link: #1a56cc;
-	--pcp-on-primary: #ffffff;
+	/* Accent, links and selection come from the brand tokens (pioneer-brand.css). */
+	--pcp-primary: var(--pcp-accent);
+	--pcp-primary-hover: var(--pcp-accent-hover);
+	--pcp-primary-dark: var(--pcp-accent-hover);
+	--pcp-on-primary: var(--pcp-on-accent);
 	--pcp-bg: #f7f8fa;
 	--pcp-paper: #ffffff;
 	--pcp-text: #0f172a;
 	--pcp-text-secondary: #475569;
 	--pcp-border: #e5e7eb;
 	--pcp-hover: rgba(15, 23, 42, 0.04);
-	--pcp-selected: #eaf1fe;
+	--pcp-selected: var(--pcp-accent-soft);
 	--pcp-success: #16a34a;
 	--pcp-warning: #d97706;
 	--pcp-error: #dc2626;
@@ -98,25 +98,24 @@
 	--checkbox-color: var(--pcp-primary);
 	--sidebar-select-color: var(--pcp-selected);
 
-	--focus-default: 0px 0px 0px 2px #c9dafb;
-	--focus-outline-default: 2px solid #c9dafb;
+	--focus-default: 0px 0px 0px 2px var(--pcp-focus);
+	--focus-outline-default: 2px solid var(--pcp-focus);
 }
 
 /* ---------- Dark: PCP darkTheme ---------- */
 :root[data-theme="dark"] {
-	/* ui-v2 kit dark values (as on live PCP): #2F6BD8 buttons, #6D9EF5 links. */
-	--pcp-primary: #2f6bd8;
-	--pcp-primary-hover: #285ec2;
-	--pcp-primary-dark: #285ec2;
-	--pcp-link: #6d9ef5;
-	--pcp-on-primary: #ffffff;
+	/* Accent, links and selection come from the brand tokens (pioneer-brand.css). */
+	--pcp-primary: var(--pcp-accent);
+	--pcp-primary-hover: var(--pcp-accent-hover);
+	--pcp-primary-dark: var(--pcp-accent-hover);
+	--pcp-on-primary: var(--pcp-on-accent);
 	--pcp-bg: #121620;
 	--pcp-paper: #191f2b;
 	--pcp-text: #e5e9f0;
 	--pcp-text-secondary: #9aa6b8;
 	--pcp-border: #283040;
 	--pcp-hover: rgba(255, 255, 255, 0.05);
-	--pcp-selected: #18264a;
+	--pcp-selected: var(--pcp-accent-soft);
 	--pcp-success: #4ade80;
 	--pcp-warning: #f0a54a;
 	--pcp-error: #f26b6b;
@@ -150,8 +149,8 @@
 	--progress-bar-bg: var(--pcp-primary);
 	--sidebar-select-color: var(--pcp-selected);
 
-	--focus-default: 0px 0px 0px 3px #2b437a;
-	--focus-outline-default: 3px solid #2b437a;
+	--focus-default: 0px 0px 0px 3px var(--pcp-focus);
+	--focus-outline-default: 3px solid var(--pcp-focus);
 }
 
 /* ---------- Components ---------- */
@@ -160,7 +159,7 @@ body {
 	font-family: var(--pcp-font);
 }
 
-/* Primary buttons: flat PCP blue, white text (ui-v2 `pri` / `priHover`). */
+/* Primary buttons: flat PCP accent (indigo), white text. */
 .btn.btn-primary,
 .btn.btn-primary:focus {
 	background-color: var(--pcp-primary);
@@ -212,32 +211,33 @@ a.text-primary,
 	box-shadow: var(--pcp-shadow-card);
 }
 
-/* Sidebar: the selected item is PCP's soft blue with primary-coloured text and icon. */
+/* Sidebar: the selected item is PCP's soft indigo with accent-coloured text and icon. */
 .standard-sidebar-item.active-sidebar {
 	background-color: var(--pcp-selected);
 	box-shadow: none;
 }
 .standard-sidebar-item.active-sidebar .sidebar-item-label,
 .standard-sidebar-item.active-sidebar .sidebar-item-icon {
-	color: var(--pcp-link);
-	--icon-stroke: var(--pcp-link);
+	color: var(--pcp-accent-ink);
+	--icon-stroke: var(--pcp-accent-ink);
 }
 
 /* ---------- Layout: PCP's shell ---------- */
 /* Values measured on the live PCP pages: a white (dark: #191F2B) side panel with a hairline
-   border, a white header bar (dark: navy gradient), and content cards on the grey page. */
+   border, the header bar from the brand tokens (white; dark: indigo gradient), and content
+   cards on the grey page. */
 
 :root:not([data-theme="dark"]) {
 	--pcp-panel: #ffffff;
 	--pcp-panel-border: #e2e8f0;
-	--pcp-topbar: #ffffff;
-	--pcp-topbar-border: #e5e7eb;
 }
 :root[data-theme="dark"] {
 	--pcp-panel: #191f2b;
 	--pcp-panel-border: #283040;
-	--pcp-topbar: linear-gradient(100deg, #071a40 0%, #0b2a66 55%, #0f3a8a 100%);
-	--pcp-topbar-border: #1f1f1f;
+}
+:root {
+	--pcp-topbar: var(--pcp-header-bg);
+	--pcp-topbar-border: var(--pcp-header-border);
 }
 
 /* App rail and sidebar */
@@ -252,9 +252,9 @@ a.text-primary,
 	background: var(--pcp-topbar);
 	border-bottom-color: var(--pcp-topbar-border);
 }
-:root[data-theme="dark"] .page-head .title-text,
-:root[data-theme="dark"] .page-head .page-title {
-	color: #ffffff;
+.page-head .title-text,
+.page-head .page-title {
+	color: var(--pcp-header-ink);
 }
 /* Secondary buttons on the navy bar: translucent, as PCP's header controls. */
 :root[data-theme="dark"] .page-head .btn-default,
@@ -301,13 +301,11 @@ a.text-primary,
 	content: var(--pcp-logo-dark);
 }
 
-/* Desk splash screen. The image comes from website_context.splash_image (hooks.py). While
-   data-theme is still "automatic", follow the OS, as desk.html does for the splash colour. */
-:root[data-theme="dark"] .splash img {
-	content: var(--pcp-logo-dark);
-}
-@media (prefers-color-scheme: dark) {
-	:root[data-theme="automatic"] .splash img {
-		content: var(--pcp-logo-dark);
-	}
+/* Desk splash screen: PCP's loader (pioneer-brand.css --pcp-loader), the same image in both
+   modes. desk.html shows website_context.splash_image (hooks.py); this also covers a site
+   whose Website Settings override that image. */
+.splash img {
+	content: var(--pcp-loader);
+	width: 72px;
+	height: 72px;
 }

@@ -29,7 +29,11 @@ add_to_apps_screen = [
 app_include_js = [
 	"hrms.bundle.js",
 ]
-app_include_css = ["hrms.bundle.css", "/assets/hrms/css/pioneer-theme.css"]
+app_include_css = [
+	"hrms.bundle.css",
+	"/assets/hrms/css/pioneer-brand.css",
+	"/assets/hrms/css/pioneer-theme.css",
+]
 code_only_modules = {"HR": ["HR Setup"]}
 app_include_icons = ["/assets/hrms/icons/module-icons.svg"]
 
@@ -38,11 +42,11 @@ app_include_icons = ["/assets/hrms/icons/module-icons.svg"]
 # include js, css files in header of web template
 # web_include_css = "/assets/hrms/css/hrms.css"
 # web_include_js = "/assets/hrms/js/hrms.js"
-web_include_css = ["/assets/hrms/css/pioneer-theme.css"]
+web_include_css = ["/assets/hrms/css/pioneer-brand.css", "/assets/hrms/css/pioneer-theme.css"]
 web_include_js = ["/assets/hrms/js/pioneer-theme.js"]
 website_context = {
 	"favicon": "/assets/hrms/images/pioneer/pcp-favicon.png",
-	"splash_image": "/assets/hrms/images/pioneer/pcp-logo.svg",
+	"splash_image": "/assets/hrms/images/pioneer/pcp-loader.svg",
 }
 
 # include custom scss in every website theme (without file extension ".scss")
