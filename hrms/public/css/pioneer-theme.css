@@ -1,0 +1,264 @@
+/*
+ * Pioneer HR: the Pioneer Core Platform (PCP) look for Frappe Desk and web pages.
+ *
+ * Loaded after Frappe's own CSS through `app_include_css` (Desk) and `web_include_css`
+ * (login and other web pages) in hrms/hooks.py. It only overrides CSS variables and a
+ * handful of selectors, so no Frappe template is edited.
+ *
+ * Source of the values: ata-parent, branch pcp-dev, src/Misc/themes.ts
+ *   light: the `Modern` theme (what PCP applies to every user, and the colours of pcpLogo.svg)
+ *   dark:  the `darkTheme` (PCP's dark mode, with its blue accent and pcpLogoDark.svg)
+ *
+ * Frappe v16 builds Desk on the Espresso token scale: raw `--gray-*` values feed the semantic
+ * `--surface-*`, `--ink-*` and `--outline-*` tokens, and the legacy names (`--text-color`,
+ * `--border-color`, ...) point at those. Re-pointing the raw scale re-themes all of Desk.
+ *
+ * Selectors are `:root:not([data-theme="dark"])` and `:root[data-theme="dark"]` (specificity
+ * 0,2,0) so they beat Frappe's `:root` / `[data-theme="dark"]` (0,1,0) and the light block
+ * never leaks into dark mode. Desk switches `data-theme` on <html> (user menu -> Toggle Theme).
+ */
+
+/* ---------- PCP tokens (shared by both modes) ---------- */
+:root {
+	--pcp-font: "InterVariable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--pcp-radius: 8px;
+	--pcp-radius-card: 12px;
+
+	/* softLightShadows (themes.ts), steps 1-5 */
+	--pcp-shadow-1: 0px 1px 2px rgba(16, 24, 40, 0.06), 0px 1px 3px rgba(16, 24, 40, 0.1);
+	--pcp-shadow-2: 0px 2px 4px rgba(16, 24, 40, 0.06), 0px 2px 8px rgba(16, 24, 40, 0.1);
+	--pcp-shadow-3: 0px 4px 6px rgba(16, 24, 40, 0.06), 0px 4px 12px rgba(16, 24, 40, 0.1);
+	--pcp-shadow-4: 0px 6px 10px rgba(16, 24, 40, 0.06), 0px 6px 18px rgba(16, 24, 40, 0.1);
+	--pcp-shadow-5: 0px 8px 12px rgba(16, 24, 40, 0.06), 0px 8px 24px rgba(16, 24, 40, 0.1);
+	--pcp-shadow-card: 0px 1px 2px rgba(15, 23, 42, 0.04);
+	--pcp-shadow-dialog: 0 24px 48px rgba(15, 23, 42, 0.18);
+
+	--pcp-logo: url("/assets/hrms/images/pioneer/pcp-logo.svg");
+	--pcp-logo-dark: url("/assets/hrms/images/pioneer/pcp-logo-dark.svg");
+
+	--font-stack: var(--pcp-font);
+	--radius: var(--pcp-radius);
+
+	--shadow-xs: var(--pcp-shadow-1);
+	--shadow-sm: var(--pcp-shadow-1);
+	--shadow: var(--pcp-shadow-2);
+	--shadow-md: var(--pcp-shadow-3);
+	--shadow-lg: var(--pcp-shadow-4);
+	--shadow-xl: var(--pcp-shadow-5);
+	--shadow-2xl: var(--pcp-shadow-dialog);
+	--custom-shadow-sm: var(--pcp-shadow-1);
+	--drop-shadow: var(--pcp-shadow-card);
+	--card-shadow: var(--pcp-shadow-card);
+	--modal-shadow: var(--pcp-shadow-dialog);
+}
+
+/* ---------- Light: PCP Modern ---------- */
+:root:not([data-theme="dark"]) {
+	--pcp-primary: #0369a1;
+	--pcp-primary-light: #0ea5e9;
+	--pcp-primary-dark: #075985;
+	--pcp-gradient: linear-gradient(to right, #0369a1, #0ea5e9);
+	--pcp-on-primary: #ffffff;
+	--pcp-bg: #f7f8fa;
+	--pcp-paper: #ffffff;
+	--pcp-text: #0f172a;
+	--pcp-text-secondary: #475569;
+	--pcp-border: #e5e7eb;
+	--pcp-hover: rgba(15, 23, 42, 0.04);
+	--pcp-selected: rgba(3, 105, 161, 0.08);
+	--pcp-success: #16a34a;
+	--pcp-warning: #d97706;
+	--pcp-error: #dc2626;
+	--pcp-info: #0284c7;
+
+	/* Espresso raw gray scale -> PCP slate. Picked so the semantic tokens land on PCP's
+	   values: --text-color (gray-900) #0F172A, --text-muted (gray-700) #475569,
+	   --text-light (gray-600) #64748B, --border-color (gray-200) #E5E7EB. */
+	--gray-50: #f7f8fa;
+	--gray-100: #f1f5f9;
+	--gray-200: #e5e7eb;
+	--gray-300: #cbd5e1;
+	--gray-400: #94a3b8;
+	--gray-500: #7b8a9f;
+	--gray-600: #64748b;
+	--gray-700: #475569;
+	--gray-800: #334155;
+	--gray-900: #0f172a;
+	--gray-950: #020617;
+
+	--primary: var(--pcp-primary);
+	--primary-color: var(--pcp-primary);
+	--brand-color: var(--pcp-primary);
+	--btn-primary: var(--pcp-primary);
+	--progress-bar-bg: var(--pcp-primary);
+	--checkbox-color: var(--pcp-primary);
+	--sidebar-select-color: var(--pcp-selected);
+
+	--focus-default: 0px 0px 0px 2px rgba(3, 105, 161, 0.35);
+	--focus-outline-default: 2px solid rgba(3, 105, 161, 0.35);
+}
+
+/* ---------- Dark: PCP darkTheme ---------- */
+:root[data-theme="dark"] {
+	--pcp-primary: #38bdf8;
+	--pcp-primary-light: #22d3ee;
+	--pcp-primary-dark: #2563eb;
+	--pcp-gradient: linear-gradient(to right, #3b82f6, #22d3ee);
+	--pcp-on-primary: #ffffff;
+	--pcp-bg: #121620;
+	--pcp-paper: #121212;
+	--pcp-text: #ededed;
+	--pcp-text-secondary: #9b9b9b;
+	--pcp-border: #3a3a3a;
+	--pcp-hover: rgba(255, 255, 255, 0.06);
+	--pcp-selected: rgba(56, 189, 248, 0.14);
+	--pcp-success: #50c878;
+	--pcp-warning: #f59e0b;
+	--pcp-error: #ff2c2c;
+	--pcp-info: #38bdf8;
+
+	/* Espresso's dark scale runs the other way (gray-950 is the page). Re-pointed so the
+	   page is PCP's #121620, text (gray-100) #EDEDED and muted text (gray-300) #9B9B9B. */
+	--gray-50: #f8fafc;
+	--gray-100: #ededed;
+	--gray-200: #bdbdbd;
+	--gray-300: #9b9b9b;
+	--gray-400: #6b7280;
+	--gray-450: #4a505c;
+	--gray-500: #3a3f4b;
+	--gray-600: #303744;
+	--gray-700: #262c38;
+	--gray-800: #1f2430;
+	--gray-900: #181d28;
+	--gray-950: #121620;
+
+	/* Grid and table lines: PCP's DATA_GRID_BORDER_DARK. */
+	--outline-gray-1: var(--pcp-border);
+	--border-color: var(--pcp-border);
+	--table-border-color: var(--pcp-border);
+
+	--primary: var(--pcp-primary);
+	--primary-color: var(--pcp-primary);
+	--brand-color: var(--pcp-primary);
+	/* White on #38BDF8 fails contrast, so filled buttons use blue-600 like PCP. */
+	--btn-primary: #2563eb;
+	--progress-bar-bg: var(--pcp-primary);
+	--sidebar-select-color: var(--pcp-selected);
+
+	--focus-default: 0px 0px 0px 3px rgba(56, 189, 248, 0.35);
+	--focus-outline-default: 3px solid rgba(56, 189, 248, 0.35);
+}
+
+/* ---------- Components ---------- */
+
+body {
+	font-family: var(--pcp-font);
+}
+
+/* Primary buttons: PCP's gradient, white text in both modes. */
+.btn.btn-primary,
+.btn.btn-primary:focus {
+	background-color: var(--btn-primary);
+	background-image: var(--pcp-gradient);
+	border-color: transparent;
+	color: var(--pcp-on-primary);
+	--icon-stroke: currentColor;
+	--icon-fill-bg: var(--btn-primary);
+	transition: filter 0.15s ease, box-shadow 0.15s ease;
+}
+.btn.btn-primary:hover {
+	color: var(--pcp-on-primary);
+	filter: brightness(1.05);
+	box-shadow: 0 4px 10px rgba(3, 105, 161, 0.25);
+}
+.btn.btn-primary:active {
+	color: var(--pcp-on-primary) !important;
+	background-color: var(--pcp-primary-dark) !important;
+	background-image: none;
+}
+:root[data-theme="dark"] .btn.btn-primary {
+	background-image: none;
+}
+:root[data-theme="dark"] .btn.btn-primary:hover {
+	background-color: #1d4ed8;
+	box-shadow: none;
+	filter: none;
+}
+
+/* Espresso buttons (v16 login, dialogs, newer Desk screens): the default gray theme's solid
+   variant becomes PCP's primary. The red (danger) theme is left alone. */
+.es-button:not([data-theme="red"]) {
+	--bt-solid-bg: var(--pcp-gradient);
+	--bt-solid-bg-hover: var(--pcp-gradient);
+	--bt-solid-bg-active: var(--pcp-primary-dark);
+	--bt-solid-fg: var(--pcp-on-primary);
+	--bt-focus: var(--focus-outline-default);
+}
+.es-button[data-variant="solid"]:not([data-theme="red"]) {
+	transition: filter 0.15s ease, box-shadow 0.15s ease;
+}
+.es-button[data-variant="solid"]:not([data-theme="red"]):hover {
+	filter: brightness(1.05);
+	box-shadow: 0 4px 10px rgba(3, 105, 161, 0.25);
+}
+:root[data-theme="dark"] .es-button:not([data-theme="red"]) {
+	--bt-solid-bg: #2563eb;
+	--bt-solid-bg-hover: #1d4ed8;
+	--bt-solid-bg-active: #1e40af;
+}
+:root[data-theme="dark"] .es-button[data-variant="solid"]:not([data-theme="red"]):hover {
+	filter: none;
+	box-shadow: none;
+}
+
+/* Links and focus. */
+a.text-primary,
+.btn-link {
+	color: var(--pcp-primary);
+}
+.form-control:focus,
+.awesomplete input:focus {
+	border-color: var(--pcp-primary);
+	box-shadow: var(--focus-default);
+}
+
+/* Cards and dialogs: PCP's 12px radius, hairline border and soft shadow. */
+.frappe-card,
+.widget,
+.modal-content {
+	border-radius: var(--pcp-radius-card);
+}
+.frappe-card,
+.widget {
+	box-shadow: var(--pcp-shadow-card);
+}
+
+/* Desk page background: PCP's page colour behind white cards. */
+:root:not([data-theme="dark"]) body[data-route],
+:root:not([data-theme="dark"]) .page-container {
+	--bg-color: var(--pcp-bg);
+}
+
+/* ---------- Logos ---------- */
+
+/* Login, signup and forgot-password: Frappe takes the first app's app_logo_url, which is
+   Frappe's own logo, so swap it here. 32px high, set by login.bundle.css. */
+.page-card-head img.app-logo {
+	content: var(--pcp-logo);
+	width: auto;
+	height: 32px;
+}
+:root[data-theme="dark"] .page-card-head img.app-logo {
+	content: var(--pcp-logo-dark);
+}
+
+/* Desk splash screen. The image comes from website_context.splash_image (hooks.py). While
+   data-theme is still "automatic", follow the OS, as desk.html does for the splash colour. */
+:root[data-theme="dark"] .splash img {
+	content: var(--pcp-logo-dark);
+}
+@media (prefers-color-scheme: dark) {
+	:root[data-theme="automatic"] .splash img {
+		content: var(--pcp-logo-dark);
+	}
+}

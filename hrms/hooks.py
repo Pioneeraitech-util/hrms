@@ -1,19 +1,19 @@
 app_name = "hrms"
-app_title = "Frappe HR"
+app_title = "Pioneer Core Platform"
 app_publisher = "Frappe Technologies Pvt. Ltd."
 app_description = "Modern HR and Payroll Software"
 app_email = "contact@frappe.io"
 app_license = "GNU General Public License (v3)"
 required_apps = ["frappe/erpnext"]
 source_link = "http://github.com/frappe/hrms"
-app_logo_url = "/assets/hrms/images/frappe-hr-logo.svg"
+app_logo_url = "/assets/hrms/images/pioneer/pcp-icon.svg"
 app_home = "/desk/hr-setup"
 
 add_to_apps_screen = [
 	{
 		"name": "hrms",
-		"logo": "/assets/hrms/images/frappe-hr-logo.svg",
-		"title": "Frappe HR",
+		"logo": "/assets/hrms/images/pioneer/pcp-icon.svg",
+		"title": "Pioneer Core Platform",
 		"route": app_home,
 		"setup_wizard_text": "Let's build a workplace your team will love.",
 		"has_permission": "hrms.hr.utils.check_app_permission",
@@ -29,7 +29,7 @@ add_to_apps_screen = [
 app_include_js = [
 	"hrms.bundle.js",
 ]
-app_include_css = "hrms.bundle.css"
+app_include_css = ["hrms.bundle.css", "/assets/hrms/css/pioneer-theme.css"]
 code_only_modules = {"HR": ["HR Setup"]}
 app_include_icons = ["/assets/hrms/icons/module-icons.svg"]
 
@@ -38,6 +38,12 @@ app_include_icons = ["/assets/hrms/icons/module-icons.svg"]
 # include js, css files in header of web template
 # web_include_css = "/assets/hrms/css/hrms.css"
 # web_include_js = "/assets/hrms/js/hrms.js"
+web_include_css = ["/assets/hrms/css/pioneer-theme.css"]
+web_include_js = ["/assets/hrms/js/pioneer-theme.js"]
+website_context = {
+	"favicon": "/assets/hrms/images/pioneer/pcp-favicon.png",
+	"splash_image": "/assets/hrms/images/pioneer/pcp-logo.svg",
+}
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "hrms/public/scss/website"
