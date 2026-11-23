@@ -1,0 +1,23 @@
+<template>
+	<img v-if="variant === 'mark'" :src="`${base}/pcp-icon.svg`" alt="Pioneer Core Platform" />
+	<span v-else class="inline-flex">
+		<img
+			class="pcp-logo-light h-full w-auto"
+			:src="`${base}/pcp-logo.svg`"
+			alt="Pioneer Core Platform"
+		/>
+		<img
+			class="pcp-logo-dark h-full w-auto"
+			:src="`${base}/pcp-logo-dark.svg`"
+			alt=""
+			aria-hidden="true"
+		/>
+	</span>
+</template>
+
+<script setup lang="ts">
+// Pioneer: the PCP logo. `mark` is the square icon, `wordmark` the full logo, which swaps to
+// its dark version in dark mode (classes in hrms/public/css/pioneer-ui.css).
+withDefaults(defineProps<{ variant?: "mark" | "wordmark" }>(), { variant: "wordmark" });
+const base = "/assets/hrms/images/pioneer";
+</script>

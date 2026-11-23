@@ -24,37 +24,26 @@ export default defineConfig({
 			},
 			manifest: {
 				display: "standalone",
-				name: "Frappe HR",
-				short_name: "Frappe HR",
+				name: "Pioneer Core Platform",
+				short_name: "PCP",
 				start_url: "/hrms",
 				scope: "/hrms",
 				id: "/hrms",
 				description: "Everyday HR & Payroll operations at your fingertips",
 				theme_color: "#ffffff",
+				// Pioneer: PCP's icons. They run edge to edge, so they are not safe as maskable.
 				icons: [
 					{
-						src: "/assets/hrms/manifest/manifest-icon-192.maskable.png",
+						src: "/assets/hrms/images/pioneer/pcp-192.png",
 						sizes: "192x192",
 						type: "image/png",
 						purpose: "any",
 					},
 					{
-						src: "/assets/hrms/manifest/manifest-icon-192.maskable.png",
-						sizes: "192x192",
-						type: "image/png",
-						purpose: "maskable",
-					},
-					{
-						src: "/assets/hrms/manifest/manifest-icon-512.maskable.png",
+						src: "/assets/hrms/images/pioneer/pcp-512.png",
 						sizes: "512x512",
 						type: "image/png",
 						purpose: "any",
-					},
-					{
-						src: "/assets/hrms/manifest/manifest-icon-512.maskable.png",
-						sizes: "512x512",
-						type: "image/png",
-						purpose: "maskable",
 					},
 				],
 			},

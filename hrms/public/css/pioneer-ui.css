@@ -1,0 +1,273 @@
+/*
+ * Pioneer HR: the Pioneer Core Platform (PCP) look for the Vue apps built on frappe-ui,
+ * the employee app (frontend/, /hrms) and Roster (roster/, /hr/roster).
+ *
+ * Imported once from each app's main CSS, after frappe-ui's style.css. Desk has its own
+ * file (pioneer-theme.css): Desk derives these token names from its raw `--gray-*` scale,
+ * while frappe-ui sets each one directly, and the Vue apps also need the Tailwind and Ionic
+ * values below.
+ *
+ * Source of the values, checked against the live PCP pages (core.pioneeraitech.com):
+ *   base:   ata-parent pcp-dev src/Misc/themes.ts, `Modern` (light) and `darkTheme` (dark)
+ *   accent: PCP's ui-v2 kit, workflow-web src/shared/ui-v2/tokens.ts
+ *
+ * How it works:
+ * - `--pcp-gray-*` (triples) back Tailwind's `gray` scale (see each app's tailwind.config.js),
+ *   so the apps' hard-coded `text-gray-800`, `bg-gray-50`, ... follow light and dark mode
+ *   without editing upstream components. The dark scale runs the other way.
+ * - frappe-ui's own semantic tokens (`--surface-*`, `--ink-*`, `--outline-*`) are
+ *   re-pointed at PCP values (as hex). `--surface-gray-7` is frappe-ui's accent (solid buttons,
+ *   switches, progress bars, tab indicators), so it becomes PCP's primary.
+ * - Ionic's variables (employee app) get the same values.
+ * - `data-theme` on <html> is set by src/theme/pioneer-dark.(js|ts) in each app.
+ */
+
+/* ---------- Light ---------- */
+:root:not([data-theme="dark"]) {
+	--pcp-primary: 29 95 224; /* #1D5FE0 */
+	--pcp-primary-hover: 23 79 191; /* #174FBF */
+	--pcp-link: 26 86 204; /* #1A56CC */
+	--pcp-page: 247 248 250; /* #F7F8FA */
+	--pcp-paper: 255 255 255;
+	--pcp-text: 15 23 42; /* #0F172A */
+	--pcp-text-secondary: 71 85 105; /* #475569 */
+	--pcp-border: 229 231 235; /* #E5E7EB */
+	--pcp-selected: 234 241 254; /* #EAF1FE */
+	--pcp-focus: #c9dafb;
+	--pcp-disabled-bg: #e5e7eb;
+	--pcp-disabled-fg: rgba(15, 23, 42, 0.38);
+
+	/* Tailwind gray -> PCP slate */
+	--pcp-gray-50: 247 248 250;
+	--pcp-gray-100: 241 245 249;
+	--pcp-gray-200: 229 231 235;
+	--pcp-gray-300: 203 213 225;
+	--pcp-gray-400: 148 163 184;
+	--pcp-gray-500: 100 116 139;
+	--pcp-gray-600: 71 85 105;
+	--pcp-gray-700: 51 65 85;
+	--pcp-gray-800: 30 41 59;
+	--pcp-gray-900: 15 23 42;
+
+	/* frappe-ui semantic tokens (hex, as the installed frappe-ui emits them) */
+	--surface-white: #ffffff;
+	--surface-cards: #ffffff;
+	--surface-modal: #ffffff;
+	--surface-selected: #ffffff;
+	--surface-menu-bar: #f7f8fa;
+	--surface-gray-1: #f7f8fa;
+	--surface-gray-2: #f1f5f9;
+	--surface-gray-3: #e5e7eb;
+	--surface-gray-4: #e2e8f0;
+	--surface-gray-5: #174fbf;
+	--surface-gray-6: #174fbf;
+	--surface-gray-7: #1d5fe0;
+	--surface-blue-1: #eaf1fe;
+	--surface-blue-3: #1d5fe0;
+	--ink-white: #ffffff;
+	--ink-gray-1: #e5e7eb;
+	--ink-gray-2: #e2e8f0;
+	--ink-gray-3: #94a3b8;
+	--ink-gray-4: #94a3b8;
+	--ink-gray-5: #64748b;
+	--ink-gray-6: #475569;
+	--ink-gray-7: #475569;
+	--ink-gray-8: #1e293b;
+	--ink-gray-9: #0f172a;
+	--ink-blue-2: #1d5fe0;
+	--ink-blue-3: #1a56cc;
+	--ink-blue-link: #1a56cc;
+	--outline-white: #ffffff;
+	--outline-gray-1: #e5e7eb;
+	--outline-gray-2: #e2e8f0;
+	--outline-gray-3: #cbd5e1;
+	--outline-gray-4: #94a3b8;
+	--outline-gray-5: #334155;
+	--outline-gray-modals: #e5e7eb;
+	--outline-blue-1: #c9dafb;
+
+	/* Ionic (employee app) */
+	--ion-background-color: #f7f8fa;
+	--ion-background-color-rgb: 247, 248, 250;
+	--ion-text-color: #0f172a;
+	--ion-text-color-rgb: 15, 23, 42;
+	--ion-border-color: #e5e7eb;
+	--ion-item-background: #ffffff;
+	--ion-card-background: #ffffff;
+	--ion-toolbar-background: #ffffff;
+	--ion-tab-bar-background: #ffffff;
+	--ion-tab-bar-color-selected: #1d5fe0;
+	--ion-tab-bar-background-focused: #eaf1fe;
+	--ion-color-primary: #1d5fe0;
+	--ion-color-primary-rgb: 29, 95, 224;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255, 255, 255;
+	--ion-color-primary-shade: #174fbf;
+	--ion-color-primary-tint: #3b82f6;
+	--ion-color-success: #16a34a;
+	--ion-color-warning: #d97706;
+	--ion-color-danger: #dc2626;
+
+	color-scheme: light;
+}
+
+/* ---------- Dark ---------- */
+:root[data-theme="dark"] {
+	--pcp-primary: 47 107 216; /* #2F6BD8 */
+	--pcp-primary-hover: 40 94 194; /* #285EC2 */
+	--pcp-link: 109 158 245; /* #6D9EF5 */
+	--pcp-page: 18 22 32; /* #121620 */
+	--pcp-paper: 25 31 43; /* #191F2B */
+	--pcp-text: 229 233 240; /* #E5E9F0 */
+	--pcp-text-secondary: 154 166 184; /* #9AA6B8 */
+	--pcp-border: 40 48 64; /* #283040 */
+	--pcp-selected: 24 38 74; /* #18264A */
+	--pcp-focus: #2b437a;
+	--pcp-disabled-bg: #283040;
+	--pcp-disabled-fg: rgba(229, 233, 240, 0.4);
+
+	/* Tailwind gray, reversed: 50 is the darkest surface, 900 the brightest text */
+	--pcp-gray-50: 30 37 51;
+	--pcp-gray-100: 35 43 58;
+	--pcp-gray-200: 40 48 64;
+	--pcp-gray-300: 59 69 88;
+	--pcp-gray-400: 102 114 134;
+	--pcp-gray-500: 154 166 184;
+	--pcp-gray-600: 174 184 199;
+	--pcp-gray-700: 195 202 214;
+	--pcp-gray-800: 229 233 240;
+	--pcp-gray-900: 248 250 252;
+
+	/* frappe-ui semantic tokens (hex, as the installed frappe-ui emits them) */
+	--surface-white: #121620;
+	--surface-cards: #191f2b;
+	--surface-modal: #1e2533;
+	--surface-selected: #2a3242;
+	--surface-menu-bar: #121620;
+	--surface-gray-1: #1e2533;
+	--surface-gray-2: #232b3a;
+	--surface-gray-3: #283040;
+	--surface-gray-4: #3b4558;
+	--surface-gray-5: #285ec2;
+	--surface-gray-6: #285ec2;
+	--surface-gray-7: #2f6bd8;
+	--surface-blue-1: #18264a;
+	--surface-blue-2: #162238;
+	--surface-blue-3: #2f6bd8;
+	/* frappe-ui inverts ink-white in dark (#0F0F0F); PCP's filled buttons keep white text. */
+	--ink-white: #ffffff;
+	--ink-gray-1: #283040;
+	--ink-gray-2: #3b4558;
+	--ink-gray-3: #667286;
+	--ink-gray-4: #667286;
+	--ink-gray-5: #8a96aa;
+	--ink-gray-6: #9aa6b8;
+	--ink-gray-7: #c3cad6;
+	--ink-gray-8: #e5e9f0;
+	--ink-gray-9: #f8fafc;
+	--ink-blue-2: #6d9ef5;
+	--ink-blue-3: #6d9ef5;
+	--ink-blue-link: #6d9ef5;
+	--outline-white: #191f2b;
+	--outline-gray-1: #283040;
+	--outline-gray-2: #3b4558;
+	--outline-gray-3: #4a5568;
+	--outline-gray-4: #667286;
+	--outline-gray-5: #e5e9f0;
+	--outline-gray-modals: #283040;
+	--outline-blue-1: #2b437a;
+
+	/* Ionic (employee app) */
+	--ion-background-color: #121620;
+	--ion-background-color-rgb: 18, 22, 32;
+	--ion-text-color: #e5e9f0;
+	--ion-text-color-rgb: 229, 233, 240;
+	--ion-border-color: #283040;
+	--ion-item-background: #191f2b;
+	--ion-card-background: #191f2b;
+	--ion-toolbar-background: #191f2b;
+	--ion-tab-bar-background: #191f2b;
+	--ion-tab-bar-color-selected: #6d9ef5;
+	--ion-tab-bar-background-focused: #18264a;
+	--ion-color-primary: #2f6bd8;
+	--ion-color-primary-rgb: 47, 107, 216;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255, 255, 255;
+	--ion-color-primary-shade: #285ec2;
+	--ion-color-primary-tint: #6d9ef5;
+	--ion-color-success: #4ade80;
+	--ion-color-warning: #f0a54a;
+	--ion-color-danger: #f26b6b;
+	--ion-color-step-50: #1e2533;
+	--ion-color-step-100: #232b3a;
+	--ion-color-step-150: #283040;
+	--ion-color-step-200: #3b4558;
+	--ion-color-step-250: #4a5568;
+
+	color-scheme: dark;
+}
+
+/* ---------- Components ---------- */
+
+body {
+	background-color: rgb(var(--pcp-page));
+	color: rgb(var(--pcp-text));
+}
+
+/* Hard-coded white surfaces (cards, headers, sheets) become PCP's raised surface in dark mode.
+   `white` itself stays white so `text-white` on buttons keeps working. */
+:root[data-theme="dark"] .bg-white {
+	background-color: rgb(var(--pcp-paper));
+}
+:root[data-theme="dark"] .border-white {
+	border-color: rgb(var(--pcp-paper));
+}
+/* Roster's month table pins its first column with a scoped `@apply bg-white`. */
+:root[data-theme="dark"] table.border-separate tr > :is(th, td):first-child {
+	background-color: rgb(var(--pcp-paper));
+}
+
+/* Disabled solid buttons (`disabled:bg-gray-700 disabled:text-white` in upstream forms). */
+button:disabled.disabled\:bg-gray-700,
+.bg-surface-gray-7:disabled {
+	background-color: var(--pcp-disabled-bg) !important;
+	color: var(--pcp-disabled-fg) !important;
+}
+
+/* Dark-filled links styled as buttons (e.g. "Go to Reset Password page"). */
+.bg-gray-900.text-white {
+	background-color: rgb(var(--pcp-primary));
+}
+.bg-gray-900.text-white:hover {
+	background-color: rgb(var(--pcp-primary-hover));
+}
+
+/* Tooltips stay dark slate as in PCP (ui-v2 toast colours), not the accent colour. */
+.rounded.bg-surface-gray-7.text-xs.text-ink-white {
+	background-color: #0f172a;
+}
+:root[data-theme="dark"] .rounded.bg-surface-gray-7.text-xs.text-ink-white {
+	background-color: #2a3242;
+}
+
+/* Links and focus rings */
+a.text-blue-500,
+.text-ink-blue-3 {
+	color: rgb(var(--pcp-link));
+}
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+	--tw-ring-color: var(--pcp-focus);
+}
+
+/* PCP logo: the light and dark versions swap with the theme (see PioneerLogo.vue). */
+.pcp-logo-dark {
+	display: none;
+}
+:root[data-theme="dark"] .pcp-logo-light {
+	display: none;
+}
+:root[data-theme="dark"] .pcp-logo-dark {
+	display: inline-block;
+}

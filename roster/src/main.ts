@@ -1,4 +1,5 @@
 import "./index.css";
+import "./theme/pioneer-dark";
 
 import { createApp } from "vue";
 import router from "./router";
