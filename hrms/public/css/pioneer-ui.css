@@ -97,12 +97,12 @@
 	--ion-tab-bar-background-focused: var(--pcp-accent-soft);
 	/* Ionic needs literal values for its primary colour (it derives -rgb from them).
 	   Keep in step with --pcp-accent / --pcp-accent-hover in pioneer-brand.css. */
-	--ion-color-primary: #4f46e5;
-	--ion-color-primary-rgb: 79, 70, 229;
+	--ion-color-primary: #1d5fe0;
+	--ion-color-primary-rgb: 29, 95, 224;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
-	--ion-color-primary-shade: #4338ca;
-	--ion-color-primary-tint: #6366f1;
+	--ion-color-primary-shade: #174fbf;
+	--ion-color-primary-tint: #3b82f6;
 	--ion-color-success: #16a34a;
 	--ion-color-warning: #d97706;
 	--ion-color-danger: #dc2626;
@@ -183,12 +183,12 @@
 	--ion-tab-bar-background: #191f2b;
 	--ion-tab-bar-color-selected: var(--pcp-accent-ink);
 	--ion-tab-bar-background-focused: var(--pcp-accent-soft);
-	--ion-color-primary: #4f46e5;
-	--ion-color-primary-rgb: 79, 70, 229;
+	--ion-color-primary: #2f6bd8;
+	--ion-color-primary-rgb: 47, 107, 216;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
-	--ion-color-primary-shade: #4338ca;
-	--ion-color-primary-tint: #6366f1;
+	--ion-color-primary-shade: #285ec2;
+	--ion-color-primary-tint: #6d9ef5;
 	--ion-color-success: #4ade80;
 	--ion-color-warning: #f0a54a;
 	--ion-color-danger: #f26b6b;
@@ -221,7 +221,7 @@ body {
 	background-color: rgb(var(--pcp-paper));
 }
 
-/* Top bars: PCP's header bar from the brand tokens (white; dark: indigo gradient).
+/* Top bars: PCP's header bar from the brand tokens (white; dark: navy gradient).
    Roster's NavBar and the employee app's page header (BaseLayout.vue). */
 .h-12.bg-white.border-b,
 ion-header .bg-white.shadow-sm {

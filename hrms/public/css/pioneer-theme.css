@@ -159,7 +159,7 @@ body {
 	font-family: var(--pcp-font);
 }
 
-/* Primary buttons: flat PCP accent (indigo), white text. */
+/* Primary buttons: flat PCP accent (blue), white text. */
 .btn.btn-primary,
 .btn.btn-primary:focus {
 	background-color: var(--pcp-primary);
@@ -211,7 +211,7 @@ a.text-primary,
 	box-shadow: var(--pcp-shadow-card);
 }
 
-/* Sidebar: the selected item is PCP's soft indigo with accent-coloured text and icon. */
+/* Sidebar: the selected item is PCP's soft blue with accent-coloured text and icon. */
 .standard-sidebar-item.active-sidebar {
 	background-color: var(--pcp-selected);
 	box-shadow: none;
@@ -224,7 +224,7 @@ a.text-primary,
 
 /* ---------- Layout: PCP's shell ---------- */
 /* Values measured on the live PCP pages: a white (dark: #191F2B) side panel with a hairline
-   border, the header bar from the brand tokens (white; dark: indigo gradient), and content
+   border, the header bar from the brand tokens (white; dark: navy gradient), and content
    cards on the grey page. */
 
 :root:not([data-theme="dark"]) {
