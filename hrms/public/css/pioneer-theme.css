@@ -84,12 +84,12 @@
 	--gray-200: #e5e7eb;
 	--gray-300: #cbd5e1;
 	--gray-400: #94a3b8;
-	--gray-500: #7b8a9f;
+	--gray-500: #8a94a6;
 	--gray-600: #64748b;
 	--gray-700: #475569;
 	--gray-800: #334155;
 	--gray-900: #0f172a;
-	--gray-950: #020617;
+	--gray-950: #0f172a;
 
 	--primary: var(--pcp-primary);
 	--primary-color: var(--pcp-primary);
@@ -133,7 +133,7 @@
 	--gray-450: #4a5568;
 	--gray-500: #3b4558;
 	--gray-600: #283040;
-	--gray-700: #232b3a;
+	--gray-700: #1e2533;
 	--gray-800: #1e2533;
 	--gray-900: #191f2b;
 	--gray-950: #121620;
@@ -662,6 +662,131 @@ input[type="checkbox"]:checked {
 :root[data-theme="dark"] ::-webkit-scrollbar-thumb {
 	background: #3b4558;
 	background-clip: padding-box;
+}
+
+/* ---------- PCP sizes and the remaining Frappe colours ---------- */
+/* Control height: core's platform standard is 32px buttons and fields (Frappe ships 28px). */
+:root {
+	--btn-height: 32px;
+	--input-height: 32px;
+}
+.es-button:not([data-size="xs"]):not([data-size="lg"]) {
+	--es-bt-h: 32px;
+}
+
+/* Espresso badges (v16 list and page status, "Active", "Not Saved"): core's kit pill colours,
+   600 weight, an edge line, full radius. Themes map to the kit tones; grey is neutral. */
+:root .es-badge {
+	--c-fill: var(--pcp-neutral-bg);
+	--c-line: var(--pcp-input-line);
+	--c-fg: var(--pcp-neutral);
+	--c-solid-bg: var(--pcp-neutral);
+	--c-solid-fg: #ffffff;
+	border-radius: 999px;
+	font-weight: 600;
+}
+:root .es-badge:not([data-variant]),
+:root .es-badge[data-variant="subtle"] {
+	border-color: var(--c-line);
+}
+:root .es-badge[data-theme="green"] {
+	--c-fill: var(--pcp-ok-bg);
+	--c-line: var(--pcp-ok-edge);
+	--c-fg: var(--pcp-ok);
+	--c-solid-bg: var(--pcp-ok);
+}
+:root .es-badge:is([data-theme="amber"], [data-theme="orange"], [data-theme="yellow"]) {
+	--c-fill: var(--pcp-warn-bg);
+	--c-line: var(--pcp-warn-edge);
+	--c-fg: var(--pcp-warn);
+	--c-solid-bg: var(--pcp-warn);
+}
+:root .es-badge[data-theme="red"] {
+	--c-fill: var(--pcp-bad-bg);
+	--c-line: var(--pcp-bad-edge);
+	--c-fg: var(--pcp-bad);
+	--c-solid-bg: var(--pcp-bad);
+}
+:root .es-badge:is([data-theme="blue"], [data-theme="cyan"], [data-theme="light-blue"]) {
+	--c-fill: var(--pcp-accent-soft);
+	--c-line: var(--pcp-accent-line);
+	--c-fg: var(--pcp-accent-ink);
+	--c-solid-bg: var(--pcp-accent);
+}
+:root .es-badge:is([data-theme="violet"], [data-theme="purple"], [data-theme="pink"]) {
+	--c-fill: var(--pcp-violet-bg);
+	--c-line: var(--pcp-violet-edge);
+	--c-fg: var(--pcp-violet);
+	--c-solid-bg: var(--pcp-violet);
+}
+
+/* Avatars: Frappe colours each person from its own palette (inline style). Core uses the accent:
+   a soft accent tile with accent initials, and the signed-in user's avatar solid indigo. */
+.avatar-frame.standard-image {
+	background-color: var(--pcp-accent-soft) !important;
+	color: var(--pcp-accent-ink) !important;
+	font-weight: 600;
+}
+#desk-dock .avatar-frame.standard-image {
+	background-color: var(--pcp-accent) !important;
+	color: #ffffff !important;
+}
+
+/* Done steps (onboarding) use the kit green. */
+.step-icon {
+	--icon-stroke: var(--pcp-ok);
+	color: var(--pcp-ok);
+}
+.step-icon svg,
+.step-icon svg use {
+	stroke: var(--pcp-ok);
+}
+
+/* Date picker (air-datepicker): core's popover, accent for today and the selection, PCP greys. */
+.datepicker {
+	background: var(--pcp-paper);
+	border: 1px solid var(--pcp-border);
+	border-radius: 12px;
+	box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+}
+.datepicker--cell {
+	border-radius: 8px;
+}
+.datepicker--day-name {
+	color: var(--pcp-text-secondary);
+	font-weight: 600;
+}
+.datepicker--cell.-other-month-,
+.datepicker--cell.-other-decade- {
+	color: var(--gray-400);
+}
+.datepicker--nav-title i {
+	color: var(--pcp-text-secondary);
+}
+.datepicker--nav-action path {
+	stroke: var(--pcp-text-secondary);
+}
+.datepicker--cell.-current- {
+	color: var(--pcp-accent-ink);
+	background: transparent;
+	font-weight: 600;
+}
+.datepicker--cell.-focus- {
+	background: var(--pcp-accent-soft);
+}
+.datepicker--cell.-selected-,
+.datepicker--cell.-selected-.-current- {
+	background: var(--pcp-accent);
+	color: #ffffff;
+}
+.datepicker--cell.-selected-.-focus- {
+	background: var(--pcp-accent-hover);
+}
+
+/* Editor selection overlay (workspace editor): the accent instead of Frappe's cyan. */
+.codex-editor-overlay__rectangle {
+	background-color: color-mix(in srgb, var(--pcp-accent) 12%, transparent);
+	border-color: color-mix(in srgb, var(--pcp-accent) 40%, transparent);
 }
 
 /* ---------- Logos ---------- */
