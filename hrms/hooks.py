@@ -1,5 +1,5 @@
 app_name = "hrms"
-app_title = "Pioneer Healthcare Platform"
+app_title = "Pioneer Core Platform"
 app_publisher = "Frappe Technologies Pvt. Ltd."
 app_description = "Modern HR and Payroll Software"
 app_email = "contact@frappe.io"
@@ -13,7 +13,7 @@ add_to_apps_screen = [
 	{
 		"name": "hrms",
 		"logo": "/assets/hrms/images/pioneer/pcp-icon.svg",
-		"title": "Pioneer Healthcare Platform",
+		"title": "Pioneer Core Platform",
 		"route": app_home,
 		"setup_wizard_text": "Let's build a workplace your team will love.",
 		"has_permission": "hrms.hr.utils.check_app_permission",
@@ -112,7 +112,10 @@ jinja = {
 
 # before_install = "hrms.install.before_install"
 after_install = "hrms.install.after_install"
-after_migrate = "hrms.setup.update_select_perm_after_install"
+after_migrate = [
+	"hrms.setup.update_select_perm_after_install",
+	"hrms.pioneer_integration.default_app.set_hrms_as_default_app",
+]
 
 setup_wizard_requires = "assets/hrms/js/setup_wizard.js"
 setup_wizard_stages = "hrms.setup_wizard.get_setup_stages"

@@ -24,7 +24,7 @@ export default defineConfig({
 			},
 			manifest: {
 				display: "standalone",
-				name: "Pioneer Healthcare Platform",
+				name: "Pioneer Core Platform",
 				short_name: "Pioneer HR",
 				start_url: "/hrms",
 				scope: "/hrms",

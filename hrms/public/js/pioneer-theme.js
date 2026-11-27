@@ -30,7 +30,7 @@
 
 	var logo = el("img", "pcp-auth-logo");
 	logo.src = "/assets/hrms/images/pioneer/pcp-logo.svg";
-	logo.alt = "Pioneer Healthcare";
+	logo.alt = "Pioneer Core Platform";
 	brand.appendChild(logo);
 
 	var copy = el("div", "pcp-auth-copy");
@@ -64,7 +64,7 @@
 		var foot = el(
 			"p",
 			"pcp-auth-foot",
-			"© " + new Date().getFullYear() + " Pioneer Healthcare Platform"
+			"© " + new Date().getFullYear() + " Pioneer Core Platform"
 		);
 		main.appendChild(foot);
 	}
