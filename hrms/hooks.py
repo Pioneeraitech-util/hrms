@@ -61,7 +61,13 @@ website_context = {
 
 # include js in doctype views
 doctype_js = {
-	"Employee": ["public/js/erpnext/employee.js", "public/js/erpnext/employee_overview.js"],
+	"Employee": [
+		"public/js/erpnext/employee.js",
+		"public/js/erpnext/employee_overview.js",
+		"public/js/ajab/employee.js",
+	],
+	"Job Opening": "public/js/ajab/job_opening.js",
+	"Job Applicant": "public/js/ajab/job_applicant.js",
 	"Company": "public/js/erpnext/company.js",
 	"Department": "public/js/erpnext/department.js",
 	"Timesheet": "public/js/erpnext/timesheet.js",
@@ -115,6 +121,7 @@ after_install = "hrms.install.after_install"
 after_migrate = [
 	"hrms.setup.update_select_perm_after_install",
 	"hrms.pioneer_integration.default_app.set_hrms_as_default_app",
+	"hrms.ajab_integration.setup.create_ajab_custom_fields",
 ]
 
 setup_wizard_requires = "assets/hrms/js/setup_wizard.js"
