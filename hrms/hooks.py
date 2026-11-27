@@ -6,13 +6,13 @@ app_email = "contact@frappe.io"
 app_license = "GNU General Public License (v3)"
 required_apps = ["frappe/erpnext"]
 source_link = "http://github.com/frappe/hrms"
-app_logo_url = "/assets/hrms/images/pioneer/pcp-icon.svg"
+app_logo_url = "/assets/hrms/images/pioneer/pcp-icon.svg?v=core1"
 app_home = "/desk/hr-setup"
 
 add_to_apps_screen = [
 	{
 		"name": "hrms",
-		"logo": "/assets/hrms/images/pioneer/pcp-icon.svg",
+		"logo": "/assets/hrms/images/pioneer/pcp-icon.svg?v=core1",
 		"title": "Pioneer Core Platform",
 		"route": app_home,
 		"setup_wizard_text": "Let's build a workplace your team will love.",
@@ -45,8 +45,8 @@ app_include_icons = ["/assets/hrms/icons/module-icons.svg"]
 web_include_css = ["/assets/hrms/css/pioneer-brand.css", "/assets/hrms/css/pioneer-theme.css"]
 web_include_js = ["/assets/hrms/js/pioneer-theme.js"]
 website_context = {
-	"favicon": "/assets/hrms/images/pioneer/pcp-favicon.png",
-	"splash_image": "/assets/hrms/images/pioneer/pcp-loader.svg",
+	"favicon": "/assets/hrms/images/pioneer/pcp-favicon.png?v=core1",
+	"splash_image": "/assets/hrms/images/pioneer/pcp-loader.svg?v=core1",
 }
 
 # include custom scss in every website theme (without file extension ".scss")

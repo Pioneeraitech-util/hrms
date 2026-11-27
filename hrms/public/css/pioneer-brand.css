@@ -75,9 +75,9 @@
 
 /* ---------- Logo, loader and sign-in art (both modes) ---------- */
 :root {
-	--pcp-logo: url("/assets/hrms/images/pioneer/pcp-logo.svg");
-	--pcp-logo-dark: url("/assets/hrms/images/pioneer/pcp-logo-dark.svg");
-	--pcp-mark: url("/assets/hrms/images/pioneer/pcp-icon.svg");
-	--pcp-loader: url("/assets/hrms/images/pioneer/pcp-loader.svg");
-	--pcp-hero-mark: url("/assets/hrms/images/pioneer/pcp-hero-mark.png");
+	--pcp-logo: url("/assets/hrms/images/pioneer/pcp-logo.svg?v=core1");
+	--pcp-logo-dark: url("/assets/hrms/images/pioneer/pcp-logo-dark.svg?v=core1");
+	--pcp-mark: url("/assets/hrms/images/pioneer/pcp-icon.svg?v=core1");
+	--pcp-loader: url("/assets/hrms/images/pioneer/pcp-loader.svg?v=core1");
+	--pcp-hero-mark: url("/assets/hrms/images/pioneer/pcp-hero-mark.png?v=core1");
 }

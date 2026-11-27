@@ -29,7 +29,7 @@
 	brand.setAttribute("aria-label", "Pioneer HR");
 
 	var logo = el("img", "pcp-auth-logo");
-	logo.src = "/assets/hrms/images/pioneer/pcp-logo.svg";
+	logo.src = "/assets/hrms/images/pioneer/pcp-logo.svg?v=core1";
 	logo.alt = "Pioneer Core Platform";
 	brand.appendChild(logo);
 
@@ -44,7 +44,7 @@
 	brand.appendChild(el("p", "pcp-auth-tagline", "Technology for a healthier tomorrow"));
 
 	var art = el("img", "pcp-auth-art");
-	art.src = "/assets/hrms/images/pioneer/pcp-hero-mark.png";
+	art.src = "/assets/hrms/images/pioneer/pcp-hero-mark.png?v=core1";
 	art.alt = "";
 	art.setAttribute("aria-hidden", "true");
 	brand.appendChild(art);

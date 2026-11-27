@@ -34,13 +34,13 @@ export default defineConfig({
 				// Pioneer: PCP's icons. They run edge to edge, so they are not safe as maskable.
 				icons: [
 					{
-						src: "/assets/hrms/images/pioneer/pcp-192.png",
+						src: "/assets/hrms/images/pioneer/pcp-192.png?v=core1",
 						sizes: "192x192",
 						type: "image/png",
 						purpose: "any",
 					},
 					{
-						src: "/assets/hrms/images/pioneer/pcp-512.png",
+						src: "/assets/hrms/images/pioneer/pcp-512.png?v=core1",
 						sizes: "512x512",
 						type: "image/png",
 						purpose: "any",

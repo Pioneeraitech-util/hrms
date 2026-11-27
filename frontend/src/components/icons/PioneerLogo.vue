@@ -1,14 +1,14 @@
 <template>
-	<img v-if="variant === 'mark'" :src="`${base}/pcp-icon.svg`" alt="Pioneer Core Platform" />
+	<img v-if="variant === 'mark'" :src="`${base}/pcp-icon.svg?v=core1`" alt="Pioneer Core Platform" />
 	<span v-else class="inline-flex">
 		<img
 			class="pcp-logo-light h-full w-auto"
-			:src="`${base}/pcp-logo.svg`"
+			:src="`${base}/pcp-logo.svg?v=core1`"
 			alt="Pioneer Core Platform"
 		/>
 		<img
 			class="pcp-logo-dark h-full w-auto"
-			:src="`${base}/pcp-logo-dark.svg`"
+			:src="`${base}/pcp-logo-dark.svg?v=core1`"
 			alt=""
 			aria-hidden="true"
 		/>
