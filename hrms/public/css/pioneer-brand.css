@@ -1,66 +1,83 @@
 /*
- * Pioneer HR: brand tokens. THE one place for Pioneer Core Platform (PCP) brand values.
+ * Pioneer HR: brand tokens. THE one place for the Pioneer brand values.
  *
  * Change the brand here and nowhere else. Loaded first, before the theme files that use it:
  *   - pioneer-theme.css  Desk and the login pages (app_include_css / web_include_css, hooks.py)
  *   - pioneer-ui.css     the employee app (frontend/) and Roster (roster/), via their main CSS
  * Upstream Frappe HR files never read these names, so upstream UI changes don't touch the brand.
  *
- * Source of truth: PCP's BLUE theme, the ui-v2 kit in workflow-web src/shared/ui-v2/tokens.ts
- * (light primary #1D5FE0, dark primary #2F6BD8), as the live PCP pages show it.
- * Do NOT take colours from ata-parent src/edition/healthcare/config.ts: that is the ATA
- * healthcare edition (indigo #4F46E5), not PCP.
- *   logo      src/edition/healthcare/PcpLogo.tsx, variant "core" (images/pioneer/pcp-logo*.svg)
- *   loader    src/edition/healthcare/PcpLoader.tsx (images/pioneer/pcp-loader.svg, blue)
+ * Source of truth: the live core site, core.pioneeraitech.com ("Pioneer Healthcare Platform",
+ * ata-parent src/edition/healthcare/config.ts + the ui-v2 accent layer, hostAccent.ts):
+ *   accent    indigo #4F46E5 (white on it 6.3:1); dark mode links/icons #A5B4FC, fills stay #4F46E5
+ *   soft/line the accent at 8% / 28% over white (dark: the tint at 14% / 36% over #191F2B)
+ *   header    white bar, ink #0B1F44; dark: linear-gradient(100deg,#1E1B4B,#272463 55%,#312E81)
+ *   logo      src/edition/healthcare/PcpLogo.tsx (images/pioneer/pcp-logo*.svg)
+ *   loader    src/edition/healthcare/PcpLoader.tsx (images/pioneer/pcp-loader.svg)
+ * See DESIGN.md (workspace root) for the whole core design system.
  */
 
 /* ---------- Light ---------- */
 :root:not([data-theme="dark"]) {
 	/* Accent: filled buttons, switches, checkboxes, progress, selected items */
-	--pcp-accent: #1d5fe0;
-	--pcp-accent-hover: #174fbf;
-	--pcp-accent-gradient: linear-gradient(#1d5fe0, #174fbf);
+	--pcp-accent: #4f46e5;
+	--pcp-accent-hover: #423bc0; /* color-mix(#4F46E5 84%, #000) */
+	--pcp-accent-gradient: linear-gradient(#4f46e5, #423bc0);
 	--pcp-on-accent: #ffffff;
 	/* Soft accent: selected rows and sidebar items, icon tiles */
-	--pcp-accent-soft: #eaf1fe;
-	--pcp-accent-soft-hover: #dbe7fd;
+	--pcp-accent-soft: #f1f0fd; /* accent 8% over white */
+	--pcp-accent-soft-hover: #e7e6fc;
+	--pcp-accent-line: #cecbf8; /* accent 28% over white */
 	/* Readable accent for text and icons on the soft accent or on paper */
-	--pcp-accent-ink: #1a56cc;
-	--pcp-focus: #c9dafb;
+	--pcp-accent-ink: #4f46e5;
+	--pcp-focus: #4f46e5; /* the 2px focus ring */
+	--pcp-focus-soft: rgba(79, 70, 229, 0.18); /* the 3px ring around a focused input */
 
-	--pcp-link: #1a56cc;
+	--pcp-link: #4f46e5;
 
 	/* Header bar */
 	--pcp-header-bg: #ffffff;
 	--pcp-header-ink: #0b1f44;
-	--pcp-header-border: #e5e7eb;
-	--pcp-header-divider: #dbe4f5;
+	--pcp-header-border: #e2e8f0;
+	--pcp-header-divider: #daddf5;
+
+	/* Labs (core's three product groups): accents for stripes, pills and icon tiles only */
+	--pcp-lab-build: #4f46e5;
+	--pcp-lab-run: #0f766e;
+	--pcp-lab-govern: #7e22ce;
 }
 
 /* ---------- Dark ---------- */
 :root[data-theme="dark"] {
-	/* ui-v2 dark: #2F6BD8 buttons, #6D9EF5 links and icons */
-	--pcp-accent: #2f6bd8;
-	--pcp-accent-hover: #285ec2;
-	--pcp-accent-gradient: linear-gradient(#2f6bd8, #285ec2);
+	/* Fills keep the saturated indigo; text and icons use the light tint */
+	--pcp-accent: #4f46e5;
+	--pcp-accent-hover: #645ce8; /* color-mix(#4F46E5 88%, #fff) */
+	--pcp-accent-gradient: linear-gradient(#4f46e5, #645ce8);
 	--pcp-on-accent: #ffffff;
-	--pcp-accent-soft: #18264a;
-	--pcp-accent-soft-hover: #162238;
-	--pcp-accent-ink: #6d9ef5;
-	--pcp-focus: #2b437a;
+	--pcp-accent-soft: #2d3448; /* #A5B4FC 14% over #191F2B */
+	--pcp-accent-soft-hover: #343c55;
+	--pcp-accent-line: #4b5576; /* #A5B4FC 36% over #191F2B */
+	--pcp-accent-ink: #a5b4fc;
+	--pcp-focus: #a5b4fc;
+	--pcp-focus-soft: rgba(165, 180, 252, 0.22);
 
-	--pcp-link: #6d9ef5;
+	--pcp-link: #a5b4fc;
 
-	/* PCP's navy header gradient */
-	--pcp-header-bg: linear-gradient(100deg, #071a40 0%, #0b2a66 55%, #0f3a8a 100%);
+	/* Core's dark header: an indigo gradient */
+	--pcp-header-bg: linear-gradient(100deg, #1e1b4b 0%, #272463 55%, #312e81 100%);
 	--pcp-header-ink: #ffffff;
-	--pcp-header-border: #1f1f1f;
-	--pcp-header-divider: #0f3a8a;
+	--pcp-header-border: #283040;
+	--pcp-header-divider: #312e81;
+
+	--pcp-lab-build: #a5b4fc;
+	--pcp-lab-run: #5eead4;
+	--pcp-lab-govern: #d8b4fe;
 }
 
-/* ---------- Logo and loader (both modes) ---------- */
+/* ---------- Logo, loader and sign-in art (both modes) ---------- */
 :root {
 	--pcp-logo: url("/assets/hrms/images/pioneer/pcp-logo.svg");
 	--pcp-logo-dark: url("/assets/hrms/images/pioneer/pcp-logo-dark.svg");
+	--pcp-mark: url("/assets/hrms/images/pioneer/pcp-icon.svg");
 	--pcp-loader: url("/assets/hrms/images/pioneer/pcp-loader.svg");
+	--pcp-hero-mark: url("/assets/hrms/images/pioneer/pcp-hero-mark.png");
 }
