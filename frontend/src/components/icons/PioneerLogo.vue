@@ -1,10 +1,10 @@
 <template>
-	<img v-if="variant === 'mark'" :src="`${base}/pcp-icon.svg`" alt="Pioneer Core Platform" />
+	<img v-if="variant === 'mark'" :src="`${base}/pcp-icon.svg`" alt="Pioneer Healthcare Platform" />
 	<span v-else class="inline-flex">
 		<img
 			class="pcp-logo-light h-full w-auto"
 			:src="`${base}/pcp-logo.svg`"
-			alt="Pioneer Core Platform"
+			alt="Pioneer Healthcare Platform"
 		/>
 		<img
 			class="pcp-logo-dark h-full w-auto"
